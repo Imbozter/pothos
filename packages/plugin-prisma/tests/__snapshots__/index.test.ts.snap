@@ -30,7 +30,7 @@ type Comment {
 }
 
 type CommentConnection {
-  edges: [CommentEdge]!
+  edges: [CommentEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -69,7 +69,7 @@ type Media {
 }
 
 type MediaConnection {
-  edges: [MediaEdge]!
+  edges: [MediaEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -119,7 +119,7 @@ type Post {
 }
 
 type PostManualMediaConnection {
-  edges: [PostManualMediaConnectionEdge]!
+  edges: [PostManualMediaConnectionEdge]
   pageInfo: PageInfo!
   totalCount: Int!
 }
@@ -131,7 +131,7 @@ type PostManualMediaConnectionEdge {
 }
 
 type PostOwnCommentsConnection {
-  edges: [PostOwnCommentsConnectionEdge]!
+  edges: [PostOwnCommentsConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -184,7 +184,7 @@ type Query {
 }
 
 type QueryManualConnection {
-  edges: [QueryManualConnectionEdge]!
+  edges: [QueryManualConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -197,7 +197,7 @@ type QueryManualConnectionEdge {
 }
 
 type QueryNamedConnection {
-  edges: [QueryNamedConnectionEdge]!
+  edges: [QueryNamedConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -210,7 +210,7 @@ type QueryNamedConnectionEdge {
 }
 
 type QueryPostsBigIntCursorConnection {
-  edges: [QueryPostsBigIntCursorConnectionEdge]!
+  edges: [QueryPostsBigIntCursorConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -223,7 +223,7 @@ type QueryPostsBigIntCursorConnectionEdge {
 }
 
 type QueryUnrelatedConnection {
-  edges: [QueryUnrelatedConnectionEdge]!
+  edges: [QueryUnrelatedConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -236,7 +236,7 @@ type QueryUnrelatedConnectionEdge {
 }
 
 type QueryUserConnection {
-  edges: [QueryUserConnectionEdge]!
+  edges: [QueryUserConnectionEdge]
   pageInfo: PageInfo!
   test: String!
   totalCount: Int!
@@ -249,7 +249,7 @@ type QueryUserConnectionEdge {
 }
 
 type QueryUserConnectionWithErrorsConnection {
-  edges: [QueryUserConnectionWithErrorsConnectionEdge]!
+  edges: [QueryUserConnectionWithErrorsConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -274,7 +274,7 @@ type QueryUsersWithErrorSuccess {
 }
 
 type QueryWithCompositeConnection {
-  edges: [QueryWithCompositeConnectionEdge]!
+  edges: [QueryWithCompositeConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -287,7 +287,7 @@ type QueryWithCompositeConnectionEdge {
 }
 
 type QueryWithIDSelectConnection {
-  edges: [QueryWithIDSelectConnectionEdge]!
+  edges: [QueryWithIDSelectConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -322,7 +322,7 @@ type SelectUser implements Node {
 }
 
 type SelectUserFollowingConnection {
-  edges: [SelectUserFollowingConnectionEdge]!
+  edges: [SelectUserFollowingConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -335,7 +335,7 @@ type SelectUserFollowingConnectionEdge {
 }
 
 type SelectUserPostsConnection {
-  edges: [SelectUserPostsConnectionEdge]!
+  edges: [SelectUserPostsConnectionEdge]
   pageInfo: PageInfo!
   totalCount: Int!
 }
@@ -373,7 +373,7 @@ type User implements Named & Node {
 }
 
 type UserCommentedPostsConnection {
-  edges: [UserCommentedPostsConnectionEdge]!
+  edges: [UserCommentedPostsConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -386,7 +386,7 @@ type UserCommentedPostsConnectionEdge {
 }
 
 type UserCommentsConnection {
-  edges: [UserCommentsConnectionEdge]!
+  edges: [UserCommentsConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -406,7 +406,7 @@ type UserFollow {
 }
 
 type UserFollowingConnection {
-  edges: [UserFollowingConnectionEdge]!
+  edges: [UserFollowingConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -421,7 +421,7 @@ type UserFollowingConnectionEdge {
 union UserOrProfile = Profile | User
 
 type UserPostsConnection {
-  edges: [UserPostsConnectionEdge]!
+  edges: [UserPostsConnectionEdge]
   pageInfo: PageInfo!
   test: Boolean
   totalCount: Int!
@@ -434,7 +434,7 @@ type UserPostsConnectionEdge {
 }
 
 type UserPostsConnectionWithErrorsConnection {
-  edges: [UserPostsConnectionWithErrorsConnectionEdge]!
+  edges: [UserPostsConnectionWithErrorsConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
@@ -453,7 +453,7 @@ type UserPostsConnectionWithErrorsSuccess {
 }
 
 type UserPostsSkipConnection {
-  edges: [UserPostsSkipConnectionEdge]!
+  edges: [UserPostsSkipConnectionEdge]
   pageInfo: PageInfo!
   totalCount: Int!
 }
@@ -483,7 +483,7 @@ type Viewer {
 }
 
 type ViewerCommentsConnection {
-  edges: [ViewerCommentsConnectionEdge]!
+  edges: [ViewerCommentsConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"
