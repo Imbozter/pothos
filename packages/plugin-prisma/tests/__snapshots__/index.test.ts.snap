@@ -491,8 +491,7 @@ type UserProfileWithErrorsSuccess {
 type Viewer {
   bio: String
   comments(after: String, before: String, first: Int, last: Int): ViewerCommentsConnection!
-  commentsWithNewQuery(after: ID, before: ID, first: Int, last: Int): ViewerCommentsWithNewQueryConnection!
-  comments(after: String, before: String, first: Int, last: Int): ViewerCommentsConnection!
+  commentsWithNewQuery(after: String, before: String, first: Int, last: Int): ViewerCommentsWithNewQueryConnection!
   id: ID!
   postCount: Int!
   postPreviews: [PostPreview!]!
@@ -515,7 +514,7 @@ type ViewerCommentsConnectionEdge {
 }
 
 type ViewerCommentsWithNewQueryConnection {
-  edges: [ViewerCommentsWithNewQueryConnectionEdge]!
+  edges: [ViewerCommentsWithNewQueryConnectionEdge]
   pageInfo: PageInfo!
 
   \\"\\"\\"default totalCount field for all connections\\"\\"\\"

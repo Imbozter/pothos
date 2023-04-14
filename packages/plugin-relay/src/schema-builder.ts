@@ -313,7 +313,7 @@ schemaBuilderProto.node = function node(param, { interfaces, extensions, id, ...
     parseId: id.parse,
   });
 
-  this.configStore.associateRefWithName(nodeRef, ref.name);
+  this.configStore.associateParamWithRef(nodeRef, ref);
 
   return nodeRef as never;
 };
@@ -323,7 +323,7 @@ schemaBuilderProto.globalConnectionField = function globalConnectionField(name, 
 };
 
 schemaBuilderProto.globalConnectionFields = function globalConnectionFields(fields) {
-  const onRef = (ref: ObjectRef<ConnectionShape<SchemaTypes, unknown, boolean>>) => {
+  const onRef = (ref: ObjectRef<SchemaTypes, ConnectionShape<SchemaTypes, unknown, boolean>>) => {
     this.configStore.onPrepare(() => {
       const config = this.configStore.getTypeConfig(ref);
 
