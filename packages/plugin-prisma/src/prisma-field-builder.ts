@@ -3,6 +3,7 @@
 import { FieldNode, GraphQLResolveInfo } from 'graphql';
 import {
   CompatibleTypes,
+  ExposeNullability,
   FieldKind,
   FieldRef,
   InputFieldMap,
@@ -117,26 +118,12 @@ export class PrismaObjectFieldBuilder<
             connectionOptions:
               | PothosSchemaTypes.ConnectionObjectOptions<
                   Types,
-<<<<<<< HEAD
-                  ObjectRef<
-                    ShapeFromTypeParam<
-                      Types,
-                      [ObjectRef<Model['Relations'][Field & keyof Model['Relations']]['Shape']>],
-                      Nullable
-                    >
-                  >,
-=======
-                  ObjectRef<Types, Shape>,
->>>>>>> 99ee9cca3 (Add builder and SchemaTypes to field and type refs)
+                  ObjectRef<Types, TypesForRelation<Types, Model, Field>['Shape']>,
                   false,
                   false,
                   PrismaConnectionShape<
                     Types,
-                    ShapeFromTypeParam<
-                      Types,
-                      [ObjectRef<Model['Relations'][Field & keyof Model['Relations']]['Shape']>],
-                      Nullable
-                    >,
+                    TypesForRelation<Types, Model, Field>['Shape'],
                     Shape,
                     Args
                   >,
@@ -144,28 +131,41 @@ export class PrismaObjectFieldBuilder<
                 >
               | ObjectRef<
                   Types,
-                  ShapeFromConnection<PothosSchemaTypes.ConnectionShapeHelper<Types, Shape, false>>
+                  ShapeFromConnection<
+                    PothosSchemaTypes.ConnectionShapeHelper<
+                      Types,
+                      TypesForRelation<Types, Model, Field>['Shape'],
+                      false
+                    >
+                  >
                 >,
             edgeOptions:
               | PothosSchemaTypes.ConnectionEdgeObjectOptions<
                   Types,
-<<<<<<< HEAD
                   ObjectRef<
+                    Types,
                     ShapeFromTypeParam<
                       Types,
-                      [ObjectRef<Model['Relations'][Field & keyof Model['Relations']]['Shape']>],
+                      [
+                        ObjectRef<
+                          Types,
+                          Model['Relations'][Field & keyof Model['Relations']]['Shape']
+                        >,
+                      ],
                       Nullable
                     >
                   >,
-=======
-                  ObjectRef<Types, Shape>,
->>>>>>> 99ee9cca3 (Add builder and SchemaTypes to field and type refs)
                   false,
                   PrismaConnectionShape<
                     Types,
                     ShapeFromTypeParam<
                       Types,
-                      [ObjectRef<Model['Relations'][Field & keyof Model['Relations']]['Shape']>],
+                      [
+                        ObjectRef<
+                          Types,
+                          Model['Relations'][Field & keyof Model['Relations']]['Shape']
+                        >,
+                      ],
                       Nullable
                     >,
                     Shape,
@@ -254,7 +254,7 @@ export class PrismaObjectFieldBuilder<
     };
 
     const cursorSelection = ModelLoader.getCursorSelection(
-      ref,
+      ref as never,
       relationField.type,
       cursorValue,
       this.builder,
@@ -386,6 +386,7 @@ export class PrismaObjectFieldBuilder<
     this.model = model;
     this.prismaFieldMap = fieldMap;
     this.typename = typename;
+    this.builder = builder;
   }
 
   relation<
@@ -580,7 +581,12 @@ export class PrismaObjectFieldBuilder<
     return <
       Nullable extends boolean,
       ResolveReturnShape,
-      Name extends CompatibleTypes<Types, Model['Shape'], Type, Nullable>,
+      Name extends CompatibleTypes<
+        Types,
+        Model['Shape'],
+        Type,
+        Type extends [unknown] ? { list: true; items: true } : true
+      >,
     >(
       ...args: NormalizeArgs<
         [
@@ -595,22 +601,23 @@ export class PrismaObjectFieldBuilder<
               ResolveReturnShape
             >,
             'resolve' | 'type' | 'select' | 'description'
-          > & { description?: string | false },
+          > &
+            ExposeNullability<Types, Type, Model['Shape'], Name, Nullable> & {
+              description?: string | false;
+            },
         ]
       >
     ): FieldRef<Types, ShapeFromTypeParam<Types, Type, Nullable>, 'PrismaObject'> => {
       const [name, { description, ...options } = {} as never] = args;
 
-      return this.expose(name as never, {
-        ...options,
-        description: getFieldDescription(
-          this.model,
-          this.builder,
-          name as string,
-          description,
-        ) as never,
-        type,
-      });
+      return this.expose(
+        name as never,
+        {
+          ...options,
+          description: getFieldDescription(this.model, this.builder, name as string, description),
+          type,
+        } as never,
+      );
     };
   }
 }

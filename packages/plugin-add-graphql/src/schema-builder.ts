@@ -16,7 +16,6 @@ import {
 } from 'graphql';
 import SchemaBuilder, {
   ArgumentRef,
-  createContextCache,
   EnumRef,
   EnumValueConfigMap,
   InputFieldRef,
@@ -242,6 +241,7 @@ proto.addGraphQLUnion = function addGraphQLUnion<Shape>(
     ...options
   }: AddGraphQLUnionTypeOptions<SchemaTypes, ObjectRef<SchemaTypes, Shape>>,
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return this.unionType<ObjectParam<SchemaTypes>, Shape>(options?.name ?? type.name, {
     ...options,
     description: type.description ?? undefined,
@@ -296,7 +296,7 @@ proto.addGraphQLInput = function addGraphQLInput<Shape extends {}>(
     extensions,
     ...options
   }: AddGraphQLInputTypeOptions<SchemaTypes, Shape>,
-) {
+): PothosSchemaTypes.InputObjectRef<SchemaTypes, Shape> {
   const ref = this.inputRef<Shape>(name);
 
   return ref.implement({
