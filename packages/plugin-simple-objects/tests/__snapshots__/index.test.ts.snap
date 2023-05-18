@@ -11,14 +11,14 @@ interface Node {
 }
 
 type Query {
-  user(id: ID!): User!
+  user(id: ID!): User
 }
 
 type User implements Node {
   contactInfo: ContactInfo!
-  firstName: String!
+  firstName: String
   id: ID!
-  lastName: String!
+  lastName: String
 }"
 `;
 

@@ -17,7 +17,7 @@ input IntFilter {
 }
 
 type Mutation {
-  createUser(data: UserCreateInput!): User!
+  createUser(data: UserCreateInput!): User
 }
 
 enum OrderBy {
@@ -26,7 +26,7 @@ enum OrderBy {
 }
 
 type Post {
-  id: ID!
+  id: ID
 }
 
 input PostCreateInput {
@@ -62,7 +62,7 @@ input ProfileOrderBy {
 
 type Query {
   post(list: StringListFilter, title: StringFilter): Post
-  posts(filter: PostFilter, order: PostOrderBy): [Post!]!
+  posts(filter: PostFilter, order: PostOrderBy): [Post!]
 }
 
 input StringFilter {
@@ -79,9 +79,9 @@ input StringListFilter {
 }
 
 type User {
-  email: String!
-  id: ID!
-  posts: [Post!]!
+  email: String
+  id: ID
+  posts: [Post!]
 }
 
 input UserCreateInput {
