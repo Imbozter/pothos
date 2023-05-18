@@ -75,7 +75,7 @@ export class SchemaBuilder<Types extends SchemaTypes> {
     string,
     {
       v3?: (
-        options: NormalizeSchemeBuilderOptions<SchemaTypes & { Defaults: 'v3' }>,
+        options: AddVersionedDefaultsToBuilderOptions<SchemaTypes, 'v3'>,
       ) => Partial<NormalizeSchemeBuilderOptions<SchemaTypes>>;
       v4?: undefined;
     }
@@ -94,12 +94,11 @@ export class SchemaBuilder<Types extends SchemaTypes> {
   constructor(options: PothosSchemaTypes.SchemaBuilderOptions<Types>) {
     this.options = [...SchemaBuilder.optionNormalizers.values()].reduce((opts, normalize) => {
       if (options.defaults && typeof normalize[options.defaults] === 'function') {
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         return {
           ...opts,
-          ...normalize[options.defaults]!(
-            opts as NormalizeSchemeBuilderOptions<SchemaTypes & { Defaults: 'v3' }>,
-          ),
-        };
+          ...normalize[options.defaults]!(opts),
+        } as PothosSchemaTypes.SchemaBuilderOptions<Types>;
       }
 
       return opts;
@@ -112,7 +111,9 @@ export class SchemaBuilder<Types extends SchemaTypes> {
         options as {
           defaultFieldNullability?: boolean;
         }
-      ).defaultFieldNullability ?? false;
+      ).defaultFieldNullability ??
+      // eslint-disable-next-line no-unneeded-ternary
+      (options.defaults === 'v3' ? false : true);
 
     this.defaultInputFieldRequiredness =
       (

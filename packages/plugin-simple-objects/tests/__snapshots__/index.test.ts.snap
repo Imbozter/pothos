@@ -11,7 +11,7 @@ interface Node {
 }
 
 type Query {
-  user(id: ID!): User!
+  user(id: ID!): User
 }
 
 type User implements Node {
@@ -19,7 +19,7 @@ type User implements Node {
   firstName: String!
   fullName: String!
   id: ID!
-  lastName: String!
+  lastName: String
 }"
 `;
 
