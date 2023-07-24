@@ -57,7 +57,7 @@ input NestedListInput {
 
 type Query {
   constructor: Boolean
-  nestedLists(input: [[[String!]!]]!): [[[String!]!]]
+  nestedLists(input: [[[String!]!]]!, nestedListInput: NestedListInput): [[[String!]!]]
   sheep: Sheep
   stuff: [stuff!]
   user: User

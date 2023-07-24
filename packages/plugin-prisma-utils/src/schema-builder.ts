@@ -43,7 +43,7 @@ const OrderByRefMap = new WeakMap<
 
 const PrismaStringFilterModeRefMap = new WeakMap<
   PothosSchemaTypes.SchemaBuilder<SchemaTypes>,
-  EnumRef<'default' | 'insensitive'>
+  EnumRef<SchemaTypes, 'default' | 'insensitive'>
 >();
 
 schemaBuilder.prismaFilter = function prismaFilter<
@@ -688,7 +688,7 @@ schemaBuilder.prismaIntAtomicUpdate = function prismaIntUpdateOperations({
       pothosPrismaInput: true,
     },
     fields: (t) => {
-      const fieldDefs: Record<string, InputFieldRef<unknown, 'InputObject'>> = {};
+      const fieldDefs: Record<string, InputFieldRef<SchemaTypes, unknown>> = {};
 
       ops.forEach((op) => {
         fieldDefs[op] = t.field({

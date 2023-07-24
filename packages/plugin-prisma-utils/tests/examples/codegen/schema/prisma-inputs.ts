@@ -1003,7 +1003,7 @@ export const PostUpdateWithoutAuthor: InputObjectRef<
     views: 'Int',
   }),
 });
-export const PostWithoutAuthorFilter: InputObjectRef<Prisma.Prisma.PostWhereInput> =
+export const PostWithoutAuthorFilter: InputObjectRef<Types, Prisma.Prisma.PostWhereInput> =
   builder.prismaWhere('Post', {
     name: 'PostWithoutAuthorFilter',
     fields: () => ({
